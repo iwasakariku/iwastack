@@ -13,15 +13,18 @@ Microsoft が主導するエージェント向けパッケージマネージャ�
 
 対象プロジェクトのディレクトリで実行：
 ```bash
-apm install iwasakariku/iwastack
+apm install iwasakariku/iwastack --target antigravity
 ```
 またはプロジェクトの `apm.yml` に以下を記述して `apm install`：
 ```yaml
+targets:
+  - antigravity
 dependencies:
   apm:
     - iwasakariku/iwastack
 ```
-> APM が自動的に Antigravity, Claude Code, Cursor, Copilot 等の適切なディレクトリ構造（`.agents/`, `AGENTS.md`）へ展開・配置します。
+> APM が自動的に Antigravity の標準ディレクトリ構造（`.agents/agents/`, `.agents/skills/`, `AGENTS.md`）へ展開・配置します。
+
 
 ---
 

@@ -83,8 +83,9 @@ iwastack/
 ### 方法 1: APM (Agent Package Manager) でインストール（推奨）
 [APM](https://github.com/microsoft/apm) を使い、クローン不要でプロジェクトに直接インストール：
 ```bash
-apm install iwasakariku/iwastack
+apm install iwasakariku/iwastack --target antigravity
 ```
+
 
 ### 方法 2: ワンライナーで直接インストール（クローン不要・最速）
 対象リポジトリのディレクトリで以下を実行：
