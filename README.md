@@ -35,21 +35,17 @@ iwastack/
 │       ├── iwasaka-investigation/  # 障害対応・根本原因究明・ログ調査
 │       └── iwasaka-ship-gate/      # 出荷ゲート・PR・Done記録
 │
+├── apm.yml              # Agent Package Manager (APM) パッケージマニフェスト
 ├── docs/                # 運用・導入ガイド
 │   └── adoption-guide.md           # グリーンフィールド vs ブラウンフィールド使い分けガイド
 ├── scripts/             # セットアップスクリプト
-│   ├── setup.ps1                   # PowerShell インストーラー (ローカル / グローバル)
-│   └── setup.sh                    # Bash インストーラー
+│   ├── remote-install.ps1          # クローン不要のワンライナー (PowerShell)
+│   ├── remote-install.sh           # クローン不要のワンライナー (Bash)
+│   ├── setup.ps1                   # ローカル / グローバルインストーラー (PowerShell)
+│   └── setup.sh                    # ローカル / グローバルインストーラー (Bash)
 ├── templates/           # プロジェクトテンプレート
 │   └── AGENTS.md                   # 新規プロジェクト用ルール定義
 └── iwasaka-brain/       # 蒸留された知識ベース (Mind as Code 全50ファイル)
-    ├── profile/         # 役割、AIツールスタック、活動リズム
-    ├── domains/         # 領域別ナラティブ（データ基盤、WMS、機器連携など）
-    ├── patterns/        # 行動の型（調査、計画、レビュー、スモーク、チケットフロー）
-    ├── principles/      # 判断原則（実測主義、スコープ制御、マルチテナント安全など）
-    ├── prompts/         # 場面別の依頼テンプレート
-    ├── faq/             # 想定問答集
-    └── timeline/        # 月次ナラティブ (2026-06〜10)
 ```
 
 ---
@@ -73,7 +69,6 @@ iwastack/
 |---|---|
 | **`iwasaka-greenfield`** | **【新規開発用】** スモークテストLP先行公開（需要実測） → インフラ〜DB〜API〜フロント一気通貫ウォーキングスケルトン実デプロイ → 人間ゲート「一気通貫デプロイ疎通OK」 → MVP肉付け。 |
 | **`iwasaka-fullcycle`** | **【実装標準】** 偵察 → 質問ファイル（yes/no） → 計画書 ＆ 反証 → 人間ゲート「計画OK」 → REDテスト作成・ロック → GREEN実装 → 独立レビュー2巡 → スモーク → PR作成 → Done記録 |
-
 | **`iwasaka-plan-gate`** | 調査先行、非目標の明示、DoD策定、質問ファイル（yes/no形式）の作成、承認ゲート「計画OK」「骨組みOK」の運用。 |
 | **`iwasaka-adversarial-review`** | 5大原則（良い点は書かない、一次情報裏取り、確信のない指摘は出さない、深刻度と確度、読み取り専用）による反証手順。 |
 | **`iwasaka-investigation`** | 生ログからの障害トリアージ、初発/再発切り分け、直前変更との因果検証、「どこに実装ある？」経路追跡、対症療法拒否。 |
@@ -81,21 +76,35 @@ iwastack/
 
 ---
 
-## 新しいリポジトリでの利用・導入方法
+## 新しいリポジトリでの利用・導入方法（クローン不要）
 
 詳細な実践運用マトリクスは [**導入・運用ガイド (`docs/adoption-guide.md`)**](./docs/adoption-guide.md) をご覧ください。
 
-### 1. プロジェクトへの導入（推奨）
-対象プロジェクトに `.agents/` とルール定義 `AGENTS.md` をインストールします：
-```powershell
-.\scripts\setup.ps1 -TargetPath C:\path\to\your-project
+### 方法 1: APM (Agent Package Manager) でインストール（推奨）
+[APM](https://github.com/microsoft/apm) を使い、クローン不要でプロジェクトに直接インストール：
+```bash
+apm install iwasakariku/iwastack
 ```
 
-### 2. グローバル環境への登録
-全プロジェクトで共通して `iwastack` を使いたい場合：
+### 方法 2: ワンライナーで直接インストール（クローン不要・最速）
+対象リポジトリのディレクトリで以下を実行：
+
+**Windows (PowerShell)**:
+```powershell
+irm https://raw.githubusercontent.com/iwasakariku/iwastack/main/scripts/remote-install.ps1 | iex
+```
+
+**macOS / Linux (Bash)**:
+```bash
+curl -fsSL https://raw.githubusercontent.com/iwasakariku/iwastack/main/scripts/remote-install.sh | bash
+```
+
+### 方法 3: グローバル環境への登録
+全プロジェクト共通で `iwastack` を利用する場合：
 ```powershell
 .\scripts\setup.ps1 -Global
 ```
+
 
 ---
 

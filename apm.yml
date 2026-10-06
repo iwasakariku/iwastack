@@ -1,0 +1,58 @@
+name: iwastack
+version: 1.0.0
+description: "Mind as Code: Practical agents, skills, and battle-tested engineering practices for Google Antigravity & AI harnesses"
+author: iwasakariku
+repository: "https://github.com/iwasakariku/iwastack"
+license: MIT
+
+targets:
+  - antigravity
+  - claude
+  - cursor
+  - copilot
+
+primitives:
+  agents:
+    - path: .agents/agents/iwasaka-persona.md
+      name: iwasaka-persona
+      description: "司令塔・全行動原則を体現したペルソナ"
+    - path: .agents/agents/iwasaka-product.md
+      name: iwasaka-product
+      description: "プロダクト構想・UXモデル・MVP定義 (0→1)"
+    - path: .agents/agents/iwasaka-scout.md
+      name: iwasaka-scout
+      description: "読み取り専用偵察エージェント"
+    - path: .agents/agents/iwasaka-refuter.md
+      name: iwasaka-refuter
+      description: "否決前提の敵対的反証エージェント"
+    - path: .agents/agents/iwasaka-reviewer.md
+      name: iwasaka-reviewer
+      description: "3レンズ独立レビュアー"
+    - path: .agents/agents/iwasaka-red-tester.md
+      name: iwasaka-red-tester
+      description: "製品コードを触らないRED専任テスター"
+
+  skills:
+    - path: .agents/skills/iwasaka-greenfield
+      name: iwasaka-greenfield
+      description: "新規立ち上げ・スモークテストLP先行 ＆ 一気通貫ウォーキングスケルトン"
+    - path: .agents/skills/iwasaka-fullcycle
+      name: iwasaka-fullcycle
+      description: "チケット駆動開発のフルサイクル実行スキル"
+    - path: .agents/skills/iwasaka-plan-gate
+      name: iwasaka-plan-gate
+      description: "計画書起草・質問ファイル・受入基準契約スキル"
+    - path: .agents/skills/iwasaka-adversarial-review
+      name: iwasaka-adversarial-review
+      description: "敵対的検証・反証手順実行スキル"
+    - path: .agents/skills/iwasaka-investigation
+      name: iwasaka-investigation
+      description: "不具合調査・障害トリアージ・根本原因究明スキル"
+    - path: .agents/skills/iwasaka-ship-gate
+      name: iwasaka-ship-gate
+      description: "出荷ゲート検証・PR作成・Doneクローズ記録スキル"
+
+  instructions:
+    - path: templates/AGENTS.md
+      target: AGENTS.md
+      description: "iwastack プロジェクト開発ルール定義"

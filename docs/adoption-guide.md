@@ -4,31 +4,57 @@
 
 ---
 
-## 1. 新しいリポジトリへの導入方法
+## 1. 新しいリポジトリへの導入方法（クローン不要）
 
-iwastack を別プロジェクトで利用する方法は主に2つあります。
+`iwastack` は Git clone を行わなくても、複数のモダンなベストプラクティスに準拠した方法で新しいリポジトリへ導入できます。
 
-### 方法 A: プロジェクトへの同梱（推奨: チーム共有・CI連携）
-リポジトリ直下に `.agents/` と `AGENTS.md` を配置し、プロジェクトのコード規約・エージェント設定としてGit管理します。
+### 方法 1: APM (Agent Package Manager) を使う（業界標準ベストプラクティス）
+Microsoft が主導するエージェント向けパッケージマネージャー [**APM**](https://github.com/microsoft/apm) を使うと、npm と同じ感覚で依存関係として管理・更新できます。
 
+対象プロジェクトのディレクトリで実行：
+```bash
+apm install iwasakariku/iwastack
+```
+またはプロジェクトの `apm.yml` に以下を記述して `apm install`：
+```yaml
+dependencies:
+  apm:
+    - iwasakariku/iwastack
+```
+> APM が自動的に Antigravity, Claude Code, Cursor, Copilot 等の適切なディレクトリ構造（`.agents/`, `AGENTS.md`）へ展開・配置します。
+
+---
+
+### 方法 2: リモート・ワンライナーで直接インストール（クローン不要・最速）
+APM CLI をインストールしていない場合でも、PowerShell または curl の1行で直接 GitHub から取得できます。
+
+**Windows (PowerShell)**:
 ```powershell
-# iwastack ディレクトリから対象リポジトリへコピー
+irm https://raw.githubusercontent.com/iwasakariku/iwastack/main/scripts/remote-install.ps1 | iex
+```
+
+**macOS / Linux (Bash)**:
+```bash
+curl -fsSL https://raw.githubusercontent.com/iwasakariku/iwastack/main/scripts/remote-install.sh | bash
+```
+
+---
+
+### 方法 3: ローカル・セットアップスクリプトを使う（手元に iwastack がある場合）
+既に手元に `iwastack` がある場合は、スクリプトで別リポジトリへ一括コピーできます。
+```powershell
 .\scripts\setup.ps1 -TargetPath C:\Users\rikut\develop\my-new-project
 ```
 
-```bash
-# または Git Submodule / 手動コピー
-cp -r /path/to/iwastack/.agents /path/to/my-new-project/.agents
-cp /path/to/iwastack/templates/AGENTS.md /path/to/my-new-project/AGENTS.md
-```
+---
 
-### 方法 B: グローバル環境への登録（個人環境で全プロジェクト共通化）
-PC内のすべてのプロジェクトで `iwasaka-*` サブエージェントやスキルを利用可能にします。
-
+### 方法 4: グローバル環境への登録（PC内全プロジェクトで共通化）
+PC内のすべてのリポジトリで共通して `iwastack` のエージェント・スキルを使いたい場合：
 ```powershell
 .\scripts\setup.ps1 -Global
 ```
-> `~/.gemini/config/agents/` および `~/.gemini/config/skills/` にインストールされます。どのリポジトリを Antigravity で開いても即座に利用可能になります。
+> `~/.gemini/config/agents/` および `~/.gemini/config/skills/` にインストールされ、どのリポジトリを Antigravity で開いても即座に有効化されます。
+
 
 ---
 
