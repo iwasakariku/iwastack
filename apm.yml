@@ -6,10 +6,12 @@ repository: "https://github.com/iwasakariku/iwastack"
 license: MIT
 
 targets:
+  - gemini
   - antigravity
   - claude
   - cursor
   - copilot
+
 
 primitives:
   agents:
