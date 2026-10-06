@@ -106,6 +106,23 @@ curl -fsSL https://raw.githubusercontent.com/iwasakariku/iwastack/main/scripts/r
 .\scripts\setup.ps1 -Global
 ```
 
+---
+
+## サブエージェントの 4つの実行モード（Antigravity UI との連携）
+
+Antigravity の環境（IDE サイドバー、Antigravity 2.0、CLI）やタスクの重要度に応じて、最適な実行モードを選択できます：
+
+| 実行モード | 操作方法 | 最適なユースケース | 特徴 |
+| :--- | :--- | :--- | :--- |
+| **1. 自律オーケストレーション** | メインに「計画を立てて反証して」と指示 | Antigravity 2.0 / フルAgentモード | メインが裏で `invoke_subagent` を自動並列起動し、結果を集約 |
+| **2. インライン `@` メンション** | チャット入力欄で `@iwasaka-refuter` | IDE サイドバー / 通常チャット | 読み取り専用や sandbox 制約が強制適用された対話セッション |
+| **3. 別タブ完全独立セッション** | New Conversation ＋ `@iwasaka-reviewer` | PRマージ前・重要設計レビュー | 実装チャット履歴とのコンテキスト的・心理的癒着を物理遮断 |
+| **4. スキル自律フォールバック** | 「`iwasaka-adversarial-review` を実行して」 | `invoke_subagent` ツールがない環境 | メイン自身が通常の人格を破棄し、反証5原則を自己適用して完走 |
+
+> [!TIP]
+> **IDE チャットで「サブエージェント起動ツールがない」と AI が止まった場合**:
+> 本スタックの `AGENTS.md` には**自律フォールバック規約**が組み込まれているため、メインエージェントは「できない」と作業を投げず、自動的にスキル（`SKILL.md`）を読み込んで自身のロールを【反証専任モード】等に切り替えて厳格な検証を完走します。
+
 
 ---
 

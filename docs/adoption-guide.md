@@ -23,7 +23,11 @@ dependencies:
   apm:
     - iwasakariku/iwastack
 ```
-> APM が自動的に Antigravity の標準ディレクトリ構造（`.agents/agents/`, `.agents/skills/`, `AGENTS.md`）へ展開・配置します。
+> **注 (APM v0.33.0 の制約)**:
+> 現行の APM ではスキル（`.agents/skills/`）は自動配置されますが、Antigravity 向けのサブエージェント自動デプロイが未対応のため、APM 実行後に以下でエージェントをコピーするか、**方法 2（リモート・ワンライナー）** のご利用を推奨します：
+> ```powershell
+> Copy-Item -Recurse -Force apm_modules\iwasakariku\iwastack\.agents\agents .agents\
+> ```
 
 
 ---
@@ -113,3 +117,20 @@ PC内のすべてのリポジトリで共通して `iwastack` のエージェン
    - 単なるコードレビューではなく、「認可・テナント境界」「API契約チェーン」のレンズを固定化。
 4. **TDDの厳格化 (`iwasaka-red-tester`)**:
    - 製品コードを一切触らせない専用テスターにより、「偽緑（最初から通ってしまう無意味なテスト）」を物理的に排除。
+
+---
+
+## 4. Antigravity UI でのサブエージェント実行モード
+
+Antigravity の実行環境やタスクの重要度に応じて、最適なモードを使い分けます：
+
+| モード | 操作方法 | 最適なユースケース | 特徴 |
+| :--- | :--- | :--- | :--- |
+| **A. 自律オーケストレーション** | メインに「反証して」と指示 | Antigravity 2.0 / フルAgentモード | AIが裏で `invoke_subagent` を自動並列起動 |
+| **B. `@` メンション直接指定** | チャット入力欄で `@iwasaka-refuter` | IDE サイドバー / 通常チャット | 読み取り専用や sandbox 制約が強制適用された対話 |
+| **C. 別タブ完全独立セッション** | New Conversation ＋ `@iwasaka-reviewer` | PRマージ前・重大な設計審査 | 実装チャット履歴とのコンテキスト的・心理的癒着を物理遮断 |
+| **D. スキル自律フォールバック** | 「`iwasaka-adversarial-review` を実行」 | `invoke_subagent` がない環境 | メインが通常の人格を破棄し、反証5原則を自己適用して完走 |
+
+> **メインエージェントの思考停止を防ぐ設計**:
+> `templates/AGENTS.md` には**自律フォールバック規約**が組み込まれているため、IDE サイドバー等でサブエージェント起動ツールが存在しない場合でも、AIが「ツールがないからできない」と作業を投げ出すことなく、自動的にスキル（`SKILL.md`）を読み込んで自身のロールを【反証専任モード】等に切り替えて厳格な検証を完走します。
+
