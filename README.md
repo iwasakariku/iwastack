@@ -45,7 +45,7 @@ iwastack/
 │   └── setup.sh                    # ローカル / グローバルインストーラー (Bash)
 ├── templates/           # プロジェクトテンプレート
 │   └── AGENTS.md                   # 新規プロジェクト用ルール定義
-└── iwasaka-brain/       # 蒸留された知識ベース (Mind as Code 全50ファイル)
+└── iwasaka-brain/       # 蒸留された知識ベース (Mind as Code 全51ファイル)
 ```
 
 ---

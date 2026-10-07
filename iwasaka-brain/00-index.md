@@ -34,7 +34,7 @@ generated: 2026-10-06
 ## 3. 行動の型（patterns）
 
 依頼と調査:
-- [[iwasaka-brain/patterns/how-i-ask|依頼の出し方]] · [[iwasaka-brain/patterns/investigation-flow|調査の進め方]] · [[iwasaka-brain/patterns/plan-before-implement|実装前に計画書を書かせる]]
+- [[iwasaka-brain/patterns/how-i-ask|依頼の出し方]] · [[iwasaka-brain/patterns/investigation-flow|調査の進め方]] · [[iwasaka-brain/patterns/plan-before-implement|実装前に計画書を書かせる]] · [[iwasaka-brain/patterns/stakeholder-alignment|ステークホルダー合意形成とインセプション]]
 
 検証とレビュー:
 - [[iwasaka-brain/patterns/adversarial-verification|敵対的検証・反証]] · [[iwasaka-brain/patterns/review-style|レビュー観点と順番]] · [[iwasaka-brain/patterns/testing-and-evidence|テスト・実測で裏を取る]] · [[iwasaka-brain/patterns/parallel-subagents|サブエージェントの並列運用]]
